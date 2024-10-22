@@ -8,30 +8,37 @@ describe('El sistema', function() {
   });
   
   it("inicialmente no tiene usuarios",function(){
-    expect(sistema.numeroUsuarios()).toEqual(0);
+    let res=sistema.numeroUsuarios();
+    expect(res.num).toEqual(0);
   });
   it("comprobamos agregar usuario con nick",function(){
-    expect(sistema.numeroUsuarios()).toEqual(0);
+    expect(sistema.numeroUsuarios().num).toEqual(0);
     sistema.agregarUsuario("Pepe");
-    expect(sistema.numeroUsuarios()).toEqual(1);
-    expect(sistema.usuarioActivo("Pepe")).toEqual(true);
+    let res=sistema.numeroUsuarios();
+    expect(res.num).toEqual(1);
+    res=sistema.usuarioActivo("Pepe");
+    expect(res.activo).toEqual(true);
   });
-  xit("comprobamos eliminar usuario",function(){
-    //comprobar que no hay usuarios
-    //agregamos un usuario
-    //comprobamos que el usuario creado está en el sistema
-    //eliminamos el usuario
-    //comprobamos que el usuario eliminado no está en el sistema
+  it("comprobamos eliminar usuario",function(){
+    sistema.agregarUsuario("Pepe");
+    let res=sistema.eliminarUsuario("Pepe");
+    expect(res.eliminado).toEqual(true);
+    res=sistema.eliminarUsuario("Pepe");
+    expect(res.eliminado).toEqual(false);
   });
-  xit("comprobar usuario activo",function(){
-    //comprobar que no hay usuarios
-    //agregamos un usuario
-    //comprobamos que el usuario creado está en el sistema
-    //comprobar un usuario que no existe
+  it("comprobar usuario activo",function(){
+    let res=sistema.usuarioActivo("Pepe");
+    expect(res.activo).toEqual(false);
+    sistema.agregarUsuario("Pepe");
+    res=sistema.usuarioActivo("Pepe");
+    expect(res.activo).toEqual(true);
   });
-  xit("comprobar el método número de usuarios",function(){
-    //calcular las claves del array asociativo Object.keys(sistema.usuarios)
-    //comprobamos que el valor por numeroUsuarios() es igual anterior
+  it("comprobar el método número de usuarios",function(){
+    let res=sistema.numeroUsuarios();
+    expect(res.num).toEqual(0);
+    sistema.agregarUsuario("Pepe");
+    res=sistema.numeroUsuarios();
+    expect(res.num).toEqual(1);
   });
 
 });

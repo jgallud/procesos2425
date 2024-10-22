@@ -30,8 +30,8 @@ function Sistema(){
         return lista;
     }
     this.usuarioActivo=function(nick){
-        let res={activo:false};
-        res.activo= this.usuarios[nick]!=undefined;
+        let res={"activo":false};
+        res.activo= (this.usuarios[nick]!=undefined);
         return res;
     }
     this.numeroUsuarios=function(){
@@ -45,6 +45,5 @@ function Usuario(nick){
     this.nick=nick;
     this.nombre=nick;
 }
-
 
 module.exports.Sistema=Sistema;
